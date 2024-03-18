@@ -1,0 +1,14 @@
+version: 0.2
+
+phases:
+  install:
+    runtime-versions:
+      python: 3.11
+  pre_build:
+    commands:
+      - pip install -r requirements.txt -q
+  build:
+    commands:
+      - aws lambda update-function-code --function-name DoordashProcessingFunction --zip-file fileb://lambda_function.zip --layers arn:aws:lambda:us-east-1:843334912286:layer:AWSSDKPandas-Python311
+      - echo "Lambda function deployed successfully!"
+
